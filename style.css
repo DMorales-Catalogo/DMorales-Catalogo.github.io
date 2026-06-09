@@ -32,12 +32,17 @@ body {
 header {
     text-align: center;
     padding: 15px 10px;
-    background: #ffffff !important; /* Fondo blanco limpio */
+    /* Cambiamos el blanco sólido por un blanco con 80% de opacidad para que el blur funcione */
+    background: rgba(255, 255, 255, 0.8) !important; 
+    /* El truco premium: un desenfoque muy leve y elegante */
+    backdrop-filter: blur(10px) !important; 
+    -webkit-backdrop-filter: blur(10px) !important; /* Compatibilidad para navegadores Safari/iOS */
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     position: sticky;
     top: 0;
     z-index: 100;
 }
+
 
 .header-container {
     max-width: 1200px;
