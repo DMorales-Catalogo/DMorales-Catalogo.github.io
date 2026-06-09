@@ -1,0 +1,401 @@
+﻿/* =========================================
+   VARIABLES Y ESTILOS BASE
+   ========================================= */
+:root {
+    --color-fondo: #f5f5f7; /* Gris muy suave, estilo Apple */
+    --color-blanco: #ffffff;
+    --color-oscuro: #1d1d1f;
+    --color-texto-suave: #86868b;
+    --color-verde-ws: #25D366; /* Verde oficial de WhatsApp */
+    --color-borde: #d2d2d7;
+    --sombra-suave: 0 4px 6px rgba(0,0,0,0.05);
+    --borde-radio: 16px;
+    --borde-radio-peq: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-oscuro);
+    padding-bottom: 40px; /* Espacio para el final de la página */
+}
+
+/* =========================================
+   CABECERA Y NAVEGACIÓN
+   ========================================= */
+header {
+    text-align: center;
+    padding: 20px 15px;
+    background: var(--color-blanco);
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.subtitulo {
+    font-size: 14px;
+    color: var(--color-texto-suave);
+    margin-top: 4px;
+}
+
+.categorias-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 15px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.categorias-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.btn-categoria {
+    flex: 0 0 auto;
+    background: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-texto-suave);
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-categoria.activa {
+    background: var(--color-oscuro);
+    color: var(--color-blanco);
+    border-color: var(--color-oscuro);
+}
+
+/* =========================================
+   CONTENEDOR DE PRODUCTOS (CUADRÍCULA)
+   ========================================= */
+.seccion-categoria {
+    display: none;
+    padding: 0 15px;
+}
+
+.seccion-categoria.activa {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas precisas para móvil */
+    gap: 12px;
+}
+
+/* =========================================
+   TARJETAS DE PRODUCTO
+   ========================================= */
+.producto-card {
+    background: var(--color-blanco);
+    border-radius: var(--borde-radio);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.producto-card:active {
+    transform: scale(0.98);
+}
+
+/* --- CARRUSEL DE IMÁGENES --- */
+.imagen-slider-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3/4; /* Proporción ideal para ropa y accesorios */
+    overflow: hidden;
+    background: #eeeeee;
+}
+
+.imagen-wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+    scrollbar-width: none;
+}
+
+.imagen-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.slider-indicador {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    font-weight: 600;
+}
+
+/* --- TEXTOS E INFORMACIÓN DE LA TARJETA --- */
+.producto-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permite que el contenido ocupe el alto disponible */
+}
+
+.producto-nombre {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Altura estandarizada para descripciones (Asegura alineación) */
+.producto-descripcion {
+    font-size: 13px;
+    color: var(--color-texto-suave);
+    height: 38px; 
+    line-height: 19px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+/* Contenedor del aviso "Toca para ver detalles" */
+.sugerencia-container {
+    height: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.sugerencia-ver-mas {
+    font-size: 11px;
+    color: var(--color-oscuro);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.producto-precio {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 4px;
+    color: var(--color-oscuro);
+}
+
+/* =========================================
+   TALLAS
+   ========================================= */
+.producto-tallas {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.producto-tallas strong {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.tallas-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.talla-item {
+    border: 1px solid var(--color-borde);
+    padding: 6px 12px;
+    border-radius: var(--borde-radio-peq);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--color-blanco);
+    user-select: none;
+}
+
+/* Talla activa/seleccionada */
+.talla-item.seleccionada {
+    background: var(--color-oscuro);
+    color: var(--color-blanco);
+    border-color: var(--color-oscuro);
+}
+
+.error-talla {
+    color: #ff3b30; /* Rojo alerta */
+    font-size: 12px;
+    margin-top: 6px;
+    display: none;
+    font-weight: 500;
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+.btn-whatsapp {
+    background-color: var(--color-verde-ws);
+    color: white;
+    border: none;
+    border-radius: var(--borde-radio-peq);
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.btn-whatsapp:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* =========================================
+   VENTANA EMERGENTE (MODAL)
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: flex-end; /* Efecto bottom-sheet en móviles */
+    justify-content: center;
+}
+
+.modal-overlay.activo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--color-blanco);
+    width: 100%;
+    max-width: 500px;
+    height: 85vh; /* Altura máxima del modal */
+    border-radius: 24px 24px 0 0; /* Bordes redondeados solo arriba */
+    padding: 20px;
+    position: relative;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.activo .modal-content {
+    transform: translateY(0);
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #f0f0f2;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.modal-slider {
+    border-radius: var(--borde-radio);
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   ADAPTACIÓN A PANTALLAS MÁS GRANDES (TABLETS Y PC)
+   ========================================= */
+@media (min-width: 768px) {
+    .productos-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .modal-overlay {
+        align-items: center; /* Centrar modal en pantallas grandes */
+    }
+    
+    .modal-content {
+        height: auto;
+        max-height: 90vh;
+        border-radius: 24px; /* Bordes redondeados en todas las esquinas */
+        transform: scale(0.95);
+    }
+    
+    .modal-overlay.activo .modal-content {
+        transform: scale(1);
+    }
+}
+
+@media (min-width: 1024px) {
+    .productos-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    main {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
