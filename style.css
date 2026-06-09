@@ -25,84 +25,82 @@ body {
     color: var(--color-oscuro);
     padding-bottom: 40px; /* Espacio para el final de la página */
 }
+
 /* =========================================
-   CABECERA Y NAVEGACIÓN (UNIFICADO)
+   CABECERA Y NAVEGACIÓN ULTRA-RESISTENTE
    ========================================= */
 header {
     text-align: center;
-    padding: 20px 15px;
-    background: rgba(255, 255, 255, 0.85); /* Efecto cristal */
-    backdrop-filter: blur(20px); /* Desenfoque elegante */
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.9) !important; /* Efecto cristal transparente */
+    backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: var(--sombra-suave);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-/* Limpieza de enlaces en la cabecera (adiós letras azules y subrayadas) */
-header a, 
-.categorias-nav a {
-    text-decoration: none;
-    color: inherit;
-    -webkit-tap-highlight-color: transparent; /* Elimina destello táctil en móviles */
-}
-
 h1 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.5px;
+    margin-bottom: 2px;
 }
 
-.subtitulo {
-    font-size: 14px;
-    color: var(--color-texto-suave);
-    margin-top: 4px;
-}
-
+/* Contenedor forzado a mantenerse en una sola fila deslizable */
 .categorias-nav {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 15px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important; /* Evita estrictamente que el texto salte de línea */
+    gap: 10px !important;
+    padding: 12px 10px !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch; /* Deslizamiento fluido en iOS/Android */
+    scrollbar-width: none; /* Oculta la barra en Firefox */
 }
 
 .categorias-nav::-webkit-scrollbar {
-    display: none;
+    display: none; /* Oculta la barra en Chrome y Safari */
 }
 
-/* Cápsulas de categorías minimalistas */
+/* SELECTOR SEGURO: Convierte cualquier elemento interno en un botón premium */
+.categorias-nav a,
+.categorias-nav button,
+.categorias-nav span,
 .btn-categoria {
-    flex: 0 0 auto;
-    background: #e8e8ed;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 24px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #515154;
-    scroll-snap-align: start;
+    display: inline-block !important;
+    flex: 0 0 auto !important;
+    background: #e8e8ed !important; /* Fondo gris claro estilo cápsula */
+    color: #515154 !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important; /* Bordes de píldora redondeada */
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important; /* Quita subrayados */
+    white-space: nowrap !important;
     cursor: pointer;
-    box-shadow: none;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* Categoría activa con relieve fino */
+/* Diseño para cuando la categoría está seleccionada o activa */
+.categorias-nav .activa,
+.categorias-nav .active,
 .btn-categoria.activa {
-    background: var(--color-oscuro);
-    color: var(--color-blanco);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    background: #1d1d1f !important; /* Negro Apple */
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* Micro-animación al presionar con el dedo */
+/* Efecto al presionar con el dedo */
+.categorias-nav a:active,
+.categorias-nav button:active,
 .btn-categoria:active {
     transform: scale(0.95);
 }
-
 
 /* =========================================
    CONTENEDOR DE PRODUCTOS (CUADRÍCULA)
