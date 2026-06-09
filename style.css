@@ -25,18 +25,28 @@ body {
     color: var(--color-oscuro);
     padding-bottom: 40px; /* Espacio para el final de la página */
 }
-
 /* =========================================
-   CABECERA Y NAVEGACIÓN
+   CABECERA Y NAVEGACIÓN (UNIFICADO)
    ========================================= */
 header {
     text-align: center;
     padding: 20px 15px;
-    background: var(--color-blanco);
+    background: rgba(255, 255, 255, 0.85); /* Efecto cristal */
+    backdrop-filter: blur(20px); /* Desenfoque elegante */
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: var(--sombra-suave);
     position: sticky;
     top: 0;
     z-index: 100;
+}
+
+/* Limpieza de enlaces en la cabecera (adiós letras azules y subrayadas) */
+header a, 
+.categorias-nav a {
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent; /* Elimina destello táctil en móviles */
 }
 
 h1 {
@@ -65,25 +75,34 @@ h1 {
     display: none;
 }
 
+/* Cápsulas de categorías minimalistas */
 .btn-categoria {
     flex: 0 0 auto;
-    background: var(--color-blanco);
-    border: 1px solid var(--color-borde);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
+    background: #e8e8ed;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--color-texto-suave);
+    color: #515154;
     scroll-snap-align: start;
     cursor: pointer;
-    transition: all 0.3s ease;
+    box-shadow: none;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+/* Categoría activa con relieve fino */
 .btn-categoria.activa {
     background: var(--color-oscuro);
     color: var(--color-blanco);
-    border-color: var(--color-oscuro);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
+
+/* Micro-animación al presionar con el dedo */
+.btn-categoria:active {
+    transform: scale(0.95);
+}
+
 
 /* =========================================
    CONTENEDOR DE PRODUCTOS (CUADRÍCULA)
