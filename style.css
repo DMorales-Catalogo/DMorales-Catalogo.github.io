@@ -417,35 +417,40 @@ header {
     margin-top: 20px;
 }
 
+/* Aseguramos que todos los enlaces dentro se vean como tarjetas */
+.contacto-links a,
 .contacto-item {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 14px 24px;
-    border-radius: 60px;            /* Píldora alargada */
+    border-radius: 60px;               /* Píldora alargada */
     background: var(--color-blanco);
     box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    text-decoration: none;
-    color: var(--color-oscuro);
+    text-decoration: none !important;  /* ¡Fuera subrayado azul! */
+    color: var(--color-oscuro) !important;
     font-weight: 600;
     font-size: 15px;
-    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
     backdrop-filter: blur(4px);
     -webkit-tap-highlight-color: transparent;
     min-width: 140px;
     justify-content: center;
     border: 1px solid var(--color-borde);
+    -webkit-appearance: none;
+    appearance: none;
 }
 
+/* Efecto táctil */
+.contacto-links a:active,
 .contacto-item:active {
     transform: scale(0.96);
     opacity: 0.85;
+    background: #f5f5f7;               /* leve cambio de fondo al presionar */
 }
 
-.contacto-texto {
-    letter-spacing: 0.3px;
-}
-
+/* Texto secundario pequeño */
 .contacto-texto small {
     font-weight: 400;
     font-size: 12px;
@@ -454,37 +459,35 @@ header {
     line-height: 1.2;
 }
 
-/* Colores distintivos al pasar el mouse (escritorio) */
-.tel-item:hover {
-    background: #e8f0fe;
-    border-color: #1a73e8;
-    color: #1a73e8;
-}
-
-.ws-item:hover {
-    background: #e6f9ef;
-    border-color: var(--color-verde-ws);
-    color: var(--color-verde-ws);
-}
-
-.fb-item:hover {
-    background: #e7ecf5;
-    border-color: #1877f2;
-    color: #1877f2;
-}
-
 /* Íconos */
 .icono-contacto {
     flex-shrink: 0;
+    color: var(--color-oscuro);        /* íconos del mismo tono que el texto */
 }
 
-/* Ajuste en móvil: dos columnas si es posible */
+/* Colores sutiles al pasar el mouse (solo escritorio) */
+@media (hover: hover) {
+    .tel-item:hover {
+        background: #f0f2f5;
+        border-color: var(--color-oscuro);
+    }
+    .ws-item:hover {
+        background: #f0f2f5;
+        border-color: var(--color-oscuro);
+    }
+    .fb-item:hover {
+        background: #f0f2f5;
+        border-color: var(--color-oscuro);
+    }
+}
+
+/* Ajuste en móvil: apilado vertical */
 @media (max-width: 480px) {
     .contacto-links {
         flex-direction: column;
         align-items: stretch;
     }
-
+    .contacto-links a,
     .contacto-item {
         justify-content: flex-start;
     }
