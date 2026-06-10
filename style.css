@@ -348,8 +348,8 @@ header {
     visibility: hidden;
     transition: all 0.3s ease;
     display: flex;
-    align-items: flex-end; /* Efecto bottom-sheet en móviles */
-    justify-content: center;
+    align-items: center;          /* Centrado vertical */
+    justify-content: center;      /* Centrado horizontal */
 }
 
 .modal-overlay.activo {
@@ -359,21 +359,22 @@ header {
 
 .modal-content {
     background: var(--color-blanco);
-    width: 100%;
-    max-width: 500px;
-    height: 85vh; /* Altura máxima del modal */
-    border-radius: 24px 24px 0 0; /* Bordes redondeados solo arriba */
+    width: 90%;                  /* Ancho con márgenes laterales */
+    max-width: 400px;            /* Límite para que no se estire demasiado */
+    max-height: 80vh;           /* Alto máximo, con scroll si es necesario */
+    border-radius: 24px;         /* Bordes redondeados en las 4 esquinas */
     padding: 20px;
     position: relative;
-    transform: translateY(100%);
+    transform: scale(0.95);      /* Animación de escala al aparecer */
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
 .modal-overlay.activo .modal-content {
-    transform: translateY(0);
+    transform: scale(1);
 }
 
 .modal-cerrar {
